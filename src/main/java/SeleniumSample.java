@@ -11,14 +11,18 @@ public class SeleniumSample
 	{
 		WebDriver driver = new FirefoxDriver();
 		openQQSignUpPage(driver);
+		fillFields(driver);
+		closeBrowser(driver);
+	}
+
+	private static void fillFields(WebDriver driver)
+	{
 		waitPageReady(driver);
 		setUpEmail(driver);
 		setUpNickName(driver);
 		setUpPassWord(driver);
 		setUpDateOfBirth(driver);
 		submitInfo(driver);
-
-		closeBrowser(driver);
 	}
 
 	private static void openQQSignUpPage(WebDriver driver)
@@ -52,18 +56,19 @@ public class SeleniumSample
 		WebElement year_value = driver.findElement(By.id("year_value"));
 		year_value.clear();
 		year_value.sendKeys("1990");
-
-		(new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("month_value")));
+		year_value.click();
 
 		WebElement month_value = driver.findElement(By.id("month_value"));
 		month_value.clear();
 		month_value.sendKeys("10");
+		month_value.click();
 
 		(new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("day_value")));
 
 		WebElement day_value = driver.findElement(By.id("day_value"));
 		day_value.clear();
 		day_value.sendKeys("10");
+		day_value.click();
 	}
 
 	private static void submitInfo(WebDriver driver)
